@@ -71,8 +71,7 @@ export class HeroService {
 
       return of([...this.heroList]);
     } else {
-      return this.apiRestService.post<Hero[], Hero>(`${this.serviceUrl}`, hero);
-      // return this.apiRestService.post<CountryParams, CountryParams>(`${this.serviceUrl}`, body)
+      return this.apiRestService.post<Hero[], Hero>(`${this.serviceUrl}/save`, hero);
     }
   }
 }

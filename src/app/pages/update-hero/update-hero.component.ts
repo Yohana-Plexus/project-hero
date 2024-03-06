@@ -20,7 +20,7 @@ export default class UpdateHeroComponent  {
     private readonly router: Router,
     private readonly snackBar: MatSnackBar
   ) {
-    this.hero = history.state.hero;
+    this.hero = history?.state?.hero ?? null;
   }
 
   saveHero(hero: Hero) {

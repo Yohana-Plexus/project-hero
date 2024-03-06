@@ -1,14 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HeroFormComponent } from './hero-form.component';
 
-describe('UpdateFormComponent', () => {
+describe('HeroFormComponent', () => {
   let component: HeroFormComponent;
   let fixture: ComponentFixture<HeroFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeroFormComponent]
+      imports: [HeroFormComponent, BrowserAnimationsModule],
     })
     .compileComponents();
     

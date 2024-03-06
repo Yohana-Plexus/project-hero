@@ -22,10 +22,10 @@ import { CommonModule } from '@angular/common';
 export class TableListComponent<T> {
   @Input({ required: true }) dataSource: T[] = [];
   @Input({ required: true }) columnsToDisplay: string[] = [];
-
+  
   @Output() onDelete: EventEmitter<T> = new EventEmitter();
   @Output() onEdit: EventEmitter<T> = new EventEmitter();
-
+  
   public getColumnHeader(column: string): string {
     return column.charAt(0).toUpperCase() + column.slice(1);
   }

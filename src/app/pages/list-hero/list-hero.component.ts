@@ -1,19 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { Router } from '@angular/router';
 import { HeroService } from '../../services/hero.service';
 import { Hero } from '../../models/hero';
-
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { TableListComponent } from '../../components/table-list/table-list.component';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { TableListComponent } from '../../components/table-list/table-list.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
-import { NavigationExtras, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-list-hero',
@@ -25,6 +24,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     TableListComponent,
     MatButtonModule,
+    MatProgressSpinnerModule
   ],
 
   templateUrl: './list-hero.component.html',
@@ -33,6 +33,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export default class ListHeroComponent implements OnInit, OnDestroy {
   public heroList: Hero[] = [];
   public heroFormControl = new FormControl('');
+  public onLoading: boolean = true;
 
   private destroy$ = new Subject<void>();
   constructor(
@@ -46,9 +47,10 @@ export default class ListHeroComponent implements OnInit, OnDestroy {
     this.heroService.list().subscribe({
       next: (heroList: Hero[]) => {
         this.heroList = heroList;
+        this.onLoading = false;
       },
       error: (error) => {
-        console.log(error);
+        this.openToast(error.message)
       },
     });
 
