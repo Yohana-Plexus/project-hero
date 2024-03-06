@@ -1,0 +1,36 @@
+<section>
+    <form [formGroup]="heroForm" (submit)="saveForm()">
+        <div class="update-container">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput #input placeholder="Name" formControlName="name" [value]="heroForm.get('name')?.value | uppercase">
+                <!-- <mat-hint align="end">{{input.value.length}}/10</mat-hint> -->
+                <!-- @if(this.heroForm.controls['name'].errors['required']){
+                    <span>error</span>
+                } -->
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Source</mat-label>
+                <input matInput #input placeholder="Source" formControlName="source">
+                <!-- <mat-hint align="end">{{input.value.length}}/10</mat-hint> -->
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Super Power</mat-label>
+                <input matInput #input placeholder="Super Power" formControlName="superpower">
+                <!-- <mat-hint align="end">{{input.value.length}}/10</mat-hint> -->
+            </mat-form-field>
+
+        </div>
+        <div class="button-content">
+            <button mat-raised-button color="primary">Save</button>
+        </div>
+    </form>
+
+</section>

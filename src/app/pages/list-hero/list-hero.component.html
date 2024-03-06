@@ -1,0 +1,22 @@
+<section class="mat-padding-card">
+    <h1>List Hero</h1>
+    @defer () {
+
+    <div class="header-container">
+        <mat-form-field>
+            <mat-label>Hero</mat-label>
+            <input type="text" matInput [formControl]="heroFormControl" placeholder="Search for name">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="createHero()">Create</button>
+    </div>
+
+    <app-table-list [dataSource]="heroList" [columnsToDisplay]="['name','description', 'superpower','source','actions']"
+        (onDelete)="deleteHero($event)" (onEdit)="editHero($event)" />
+
+
+    }
+    @loading {
+        <p>Cargando....</p>
+    }
+</section>
